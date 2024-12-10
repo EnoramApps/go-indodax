@@ -14,14 +14,12 @@ type respGetInfo struct {
 	Message string
 }
 
-//
 // User Info containt balance info, wallet address, user id, profile picture, username, and email of user.
-//
 type UserInfo struct {
 	Balance        map[string]float64
 	BalanceHold    map[string]float64
 	WalletAddress  map[string]string
-	UserId         int
+	UserId         interface{}
 	ProfilePicture string
 	UserName       string
 	ServerTime     time.Time
@@ -47,11 +45,7 @@ func (UserInfo *UserInfo) UnmarshalJSON(b []byte) (err error) {
 		case fieldNameWalletAddress:
 			UserInfo.WalletAddress, err = jsonToMapStringString(v.(map[string]interface{}))
 		case fieldNameUserId:
-			val64, err := strconv.Atoi(v.(string))
-			if err != nil {
-				return err
-			}
-			UserInfo.UserId = int(val64)
+			UserInfo.UserId = v
 		case fieldNameProfilePicture:
 			UserInfo.ProfilePicture = fmt.Sprintf("%v", v)
 		case fieldNameEmail:
