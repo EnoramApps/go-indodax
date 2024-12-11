@@ -1,4 +1,4 @@
-module github.com/wildanfaz/go-indodax
+module github.com/EnoramApps/go-indodax
 
 go 1.23.4
 
